@@ -1,0 +1,33 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rec-app-service
+  namespace: recommend
+spec:
+  selector:
+    app: rec-app-pod-label
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rec-app-ingress
+  namespace: recommend
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: rec-app.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rec-app-service
+                port:
+                  number: 80

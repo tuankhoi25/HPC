@@ -1,0 +1,30 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+wheels/
+
+# macOS
+.DS_Store
+
+# Virtual environments
+.venv/
+env/
+ENV/
+
+
+# IDE / Editor
+.vscode/
+.idea/
+
+
+# Docker
+*.log
+
+# Environment variable files
+.env

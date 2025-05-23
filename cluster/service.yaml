@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rec-app-service
+  namespace: recommend
+spec:
+  selector:
+    app: rec-app-pod-label
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rec-app-deployment
+  namespace: recommend
+  labels:
+    app: rec-app-deployment-label
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: rec-app-pod-label
+  template:
+    metadata:
+      labels:
+        app: rec-app-pod-label
+    spec:
+      containers:
+      - name: rec-app
+        image: riliss1stt/recommend-app:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
