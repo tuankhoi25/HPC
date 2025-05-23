@@ -6,9 +6,10 @@ This guide provides step-by-step instructions for preparing your environment, bu
 
 ## 0. Prepare Working Directory and Source Code
 
-### Create Project Directory
+### Create Project Directory and Move Into It
 ```bash
-mkdir HPC
+mkdir HPC/
+cd HPC/
 ```
 
 ### Clone the Source Code
@@ -16,7 +17,7 @@ mkdir HPC
 git clone https://github.com/tuankhoi25/HPC.git
 ```
 
-### Change to Project Directory
+### Change to Project Directory (if not already inside)
 ```bash
 cd HPC/
 ```
@@ -121,11 +122,15 @@ kubectl apply -f cluster/deployment.yaml
 kubectl apply -f cluster/service.yaml
 ```
 
+### Create a Ingress
+```bash
+kubectl apply -f cluster/ingress.yaml
+```
+
 ### Port Forward to Access Ingress Controller (for local testing)
 ```bash
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 ```
-You can now access your app at http://localhost:8080 or via your custom host (see next step).
 
 ---
 
@@ -139,11 +144,16 @@ Add the following line at the end:
 ```
 127.0.0.1 rec-app.local
 ```
-You can now access your app at http://rec-app.local.
+You can now access your app at http://rec-app.local:8080.
 
 ---
 
 ## 7. Cleanup and Cluster Deletion
+
+### Delete Ingress
+```bash
+kubectl delete -f cluster/ingress.yaml
+```
 
 ### Uninstall Ingress-Nginx
 ```bash
@@ -200,3 +210,5 @@ kind delete cluster --name hpc-cluster
 ## License
 
 This repository is provided for educational and demonstration purposes. Modify and adapt as needed for your use case.
+
+chmod +x cluster/deploy.sh cluster/delete.sh

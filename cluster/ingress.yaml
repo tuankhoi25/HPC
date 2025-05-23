@@ -1,16 +1,3 @@
-kind: Service
-apiVersion: v1
-metadata:
-  name: rec-app-service
-  namespace: recommend
-spec:
-  selector:
-    app: rec-app-pod-label
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
